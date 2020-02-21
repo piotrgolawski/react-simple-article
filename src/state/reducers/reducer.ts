@@ -8,7 +8,6 @@ const initialState = {
 };
 
 function rootReducer(state = initialState, action: any) {
-  console.log('action.type', action.type);
   if (action.type === ADD_ARTICLE) {
     return { ...state, article: action.payload, loading: false, error: null };
   }

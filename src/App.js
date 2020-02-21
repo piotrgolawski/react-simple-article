@@ -1,15 +1,16 @@
 import React from 'react';
 import './App.css';
-import {addArticle, setError} from './state/actions/article.action';
-import {connect, useDispatch} from 'react-redux';
+import { addArticle, setError } from './state/actions/article.action';
+import { connect, useDispatch } from 'react-redux';
 import { createMuiTheme } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline/CssBaseline';
 import Page from './components/Page';
 import ErrorPage from './components/ErrorPage';
 import Spinner from './components/Spinner';
-import get from "lodash/get";
-import {Helmet} from "react-helmet";
+import get from 'lodash/get';
+import { Helmet } from 'react-helmet';
+import isEqual from 'lodash/isEqual';
 
 const mainTitle = 'Article Page | ';
 let title;
@@ -17,13 +18,13 @@ let title;
 function App(props) {
   fetchData(useDispatch());
 
-    if (props.loading) {
-        title = mainTitle + 'Loading'
-        return loadingView();
-    }
+  if (props.loading) {
+    title = mainTitle + 'Loading';
+    return loadingView();
+  }
 
   if (props.error) {
-      title = mainTitle + 'Error';
+    title = mainTitle + 'Error';
     return errorView(props.error);
   }
 
@@ -53,9 +54,9 @@ function defaultView() {
 function template(component) {
   return (
     <ThemeProvider theme={theme}>
-        <Helmet>
-            <title>{title}</title>
-        </Helmet>
+      <Helmet>
+        <title>{title}</title>
+      </Helmet>
       <CssBaseline />
       <div className="App">{component}</div>
     </ThemeProvider>
@@ -63,21 +64,36 @@ function template(component) {
 }
 
 function mapStateToProps(state) {
-    return {loading: state.loading, error: state.error, title: get(state, 'article.title', '')};
+  return { loading: state.loading, error: state.error, title: get(state, 'article.title', '') };
+}
+
+function articleDataValid(json) {
+  return (
+    json &&
+    json.name &&
+    json.elements &&
+    isEqual(Object.keys(json.elements).sort(), ['author', 'body', 'date', 'heading', 'mainImage'])
+  );
 }
 
 function fetchData(dispatch) {
-    fetch(
-        'https://my12.digitalexperience.ibm.com/api/859f2008-a40a-4b92-afd0-24bb44d10124/delivery/v1/content' +
-        '/fa9519d5-0363-4b8d-8e1f-627d802c08a8'
-    )
-        .then(res => res.json())
-        .then(json => {
-            dispatch(addArticle({elements : json.elements, title: json.name}));
-        })
-        .catch(error => {
-            dispatch(setError(error));
-        });
+  fetch(
+    'https://my12.digitalexperience.ibm.com/api/859f2008-a40a-4b92-afd0-24bb44d10124/delivery/v1/content' +
+      '/fa9519d5-0363-4b8d-8e1f-627d802c08a8'
+  )
+    .then(res => res.json())
+    .then(json => {
+      if (!articleDataValid(json)) {
+        throw new Error('Data not valid!');
+      }
+      return json;
+    })
+    .then(json => {
+      dispatch(addArticle({ elements: json.elements, title: json.name }));
+    })
+    .catch(error => {
+      dispatch(setError(error));
+    });
 }
 
 export default connect(mapStateToProps)(App);
