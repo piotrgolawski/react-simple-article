@@ -1,19 +1,12 @@
-import {connect} from 'react-redux';
-import get from "lodash/get";
+import { connect } from 'react-redux';
+import get from 'lodash/get';
 
 function Author(props) {
-    return get(props, 'value', '');
+  return get(props, 'value', '');
 }
 
 function mapStateToProps(state) {
-    if (state.article && state.article.author ) {
-        return { ...state.article.author };
-    } else {
-        return { }
-    }
-
+    return {... get(state, 'article.elements.author')};
 }
 
-export default connect(
-    mapStateToProps,
-)(Author);
+export default connect(mapStateToProps)(Author);

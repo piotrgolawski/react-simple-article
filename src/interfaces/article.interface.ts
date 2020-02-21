@@ -1,29 +1,29 @@
 export interface Article {
-    name: string;
-    elements: {
-        heading: DefaultElement,
-        author: DefaultElement,
-        body: BodyElement,
-        date: DefaultElement,
-        mainImage: ImageElement
-    }
+  title: string;
+  elements: {
+    heading: DefaultElement;
+    author: DefaultElement;
+    body: BodyElement;
+    date: DefaultElement;
+    mainImage: ImageElement;
+  };
 }
 
 export interface DefaultElement {
-    elementType: string;
-    value: string;
+  elementType: string;
+  value: string;
 }
 
 export interface BodyElement {
-    elementType: string;
-    values: string[];
+  elementType: string;
+  values: string[];
 }
 
 export interface ImageElement {
-    elementType: string;
-    value: {
-        leadImage: {
-            url: string;
-        }
-    }
+  elementType: string;
+  value: {
+    leadImage: {
+      url: string;
+    };
+  };
 }
