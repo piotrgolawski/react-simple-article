@@ -3,10 +3,8 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import fetchMock from 'fetch-mock';
 import { apiUri } from '../env/api';
-import { ADD_ARTICLE, addArticle, loadArticle, SET_ERROR } from '../state/actions/article.action';
-// TODO move to hlpers
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
+import { loadArticle, SET_ERROR, SET_ARTICLE } from '../state/actions/article.action';
+const mockStore = configureMockStore([thunk]);
 
 describe('Action', () => {
   afterEach(() => {
@@ -23,7 +21,7 @@ describe('Action', () => {
       dispatch = jest.spyOn(store, 'dispatch');
     });
 
-    it('dispatch addArticle when data is valid', async done => {
+    it('dispatch setArticle when data is valid', async done => {
       const data = {
         name: 'Article title',
         elements: {
@@ -45,7 +43,7 @@ describe('Action', () => {
       const payload = store.getActions()[0].payload;
       const expectedPayload = { elements: data.elements, title: data.name };
 
-      expect(action).toBe(ADD_ARTICLE);
+      expect(action).toBe(SET_ARTICLE);
       expect(payload).toEqual(expectedPayload);
       expect(dispatch).toHaveBeenCalledTimes(1);
       done();

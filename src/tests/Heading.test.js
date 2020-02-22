@@ -7,8 +7,7 @@ import Heading from '../components/Heading';
 import Author from '../components/Author';
 import ArticleDate from '../components/ArticleDate';
 
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
+const mockStore = configureMockStore([thunk]);
 
 /**
  * @type ShallowWrapper

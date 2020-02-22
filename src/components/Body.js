@@ -18,7 +18,7 @@ function Body(props) {
 }
 
 function mapStateToProps(state) {
-    return {... get(state, 'article.elements.body')};
+  return { ...get(state, 'article.elements.body') };
 }
 
 export default connect(mapStateToProps)(Body);

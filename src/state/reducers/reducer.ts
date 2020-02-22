@@ -1,4 +1,4 @@
-import { ADD_ARTICLE, SET_ERROR } from '../actions/article.action';
+import { SET_ARTICLE, SET_ERROR } from '../actions/article.action';
 import { Article } from '../../interfaces/article.interface';
 
 const initialState = {
@@ -8,7 +8,7 @@ const initialState = {
 };
 
 function rootReducer(state = initialState, action: any) {
-  if (action.type === ADD_ARTICLE) {
+  if (action.type === SET_ARTICLE) {
     return { ...state, article: action.payload, loading: false, error: null };
   }
 

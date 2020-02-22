@@ -5,7 +5,7 @@ import Date from './ArticleDate';
 import CardHeader from '@material-ui/core/CardHeader/CardHeader';
 import Avatar from '@material-ui/core/Avatar';
 import { avatarCardClasses } from '../helpers/card-classes.helper';
-import get from "lodash/get";
+import get from 'lodash/get';
 
 function Heading(props) {
   const classes = avatarCardClasses();
@@ -33,7 +33,7 @@ function Heading(props) {
 }
 
 function mapStateToProps(state) {
-    return {... get(state, 'article.elements.author')};
+  return { ...get(state, 'article.elements.author') };
 }
 
 export default connect(mapStateToProps)(Heading);

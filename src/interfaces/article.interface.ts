@@ -8,21 +8,24 @@ export interface Article {
     mainImage: ImageElement;
   };
 }
-// TODO remove elementType
+
 export interface DefaultElement {
-  elementType: string;
   value: string;
 }
 
 export interface BodyElement {
-  elementType: string;
   values: string[];
 }
 
 export interface ImageElement {
-  elementType: string;
   value: {
     leadImage: {
+      url: string;
+    };
+    card: {
+      url: string;
+    };
+    lead: {
       url: string;
     };
   };

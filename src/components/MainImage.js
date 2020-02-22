@@ -39,7 +39,7 @@ function getProperImage() {
 }
 
 function mapStateToProps(state) {
-  return {... get(state, 'article.elements.mainImage')}
+  return { ...get(state, 'article.elements.mainImage') };
 }
 
 export default connect(mapStateToProps)(MainImage);

@@ -6,7 +6,7 @@ function ArticleDate(props) {
 }
 
 function mapStateToProps(state) {
-  return {... get(state, 'article.elements.date')}
+  return { ...get(state, 'article.elements.date') };
 }
 
 export default connect(mapStateToProps)(ArticleDate);

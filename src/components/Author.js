@@ -6,7 +6,7 @@ function Author(props) {
 }
 
 function mapStateToProps(state) {
-    return {... get(state, 'article.elements.author')};
+  return { ...get(state, 'article.elements.author') };
 }
 
 export default connect(mapStateToProps)(Author);

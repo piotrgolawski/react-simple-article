@@ -8,8 +8,7 @@ import Spinner from '../components/Spinner';
 import ErrorPage from '../components/ErrorPage';
 import Heading from '../components/Heading';
 
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
+const mockStore = configureMockStore([thunk]);
 
 /**
  * @type ShallowWrapper
@@ -55,7 +54,6 @@ describe('<App /> should', () => {
   });
 });
 
-// TODO move to helper
 function createContainer(store) {
   container = mount(
     <Provider store={store}>
