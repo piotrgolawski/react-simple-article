@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { loadArticle } from './state/actions/article.action';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { createMuiTheme } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline/CssBaseline';
@@ -15,8 +15,7 @@ const mainTitle = 'Article Page | ';
 let title;
 
 function App(props) {
-  const dispatch = useDispatch();
-  dispatch(loadArticle());
+  props.dispatch(loadArticle());
 
   if (props.loading) {
     title = mainTitle + 'Loading';
@@ -63,8 +62,8 @@ function template(component) {
   );
 }
 
-function mapStateToProps(state) {
-  return { loading: state.loading, error: state.error, title: get(state, 'article.title', '') };
+function mapStateToProps(state, dispatch) {
+  return { loading: state.loading, error: state.error, title: get(state, 'article.title', ''), dispatch };
 }
 
 export default connect(mapStateToProps)(App);

@@ -8,7 +8,7 @@ export const rootCardClasses = makeStyles(theme => ({
 }));
 
 export const errorRootCardClasses = makeStyles(theme => ({
-  root: {
+  errorRoot: {
     width: '45%',
   },
 }));

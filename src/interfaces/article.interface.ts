@@ -8,7 +8,7 @@ export interface Article {
     mainImage: ImageElement;
   };
 }
-
+// TODO remove elementType
 export interface DefaultElement {
   elementType: string;
   value: string;

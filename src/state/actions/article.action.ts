@@ -1,5 +1,6 @@
 import { Article } from '../../interfaces/article.interface';
-import isEqual from 'lodash/isEqual';
+import { articleDataValid } from '../../helpers/validators';
+import { apiUri } from '../../env/api';
 
 export const ADD_ARTICLE = 'ADD_ARTICLE';
 export const SET_ERROR = 'SET_ERROR';
@@ -14,10 +15,7 @@ export function setError(error: string) {
 
 export function loadArticle() {
   return (dispatch: any) => {
-    fetch(
-      'https://my12.digitalexperience.ibm.com/api/859f2008-a40a-4b92-afd0-24bb44d10124/delivery/v1/content' +
-        '/fa9519d5-0363-4b8d-8e1f-627d802c08a8'
-    )
+    return fetch(apiUri)
       .then(res => res.json())
       .then(json => {
         if (!articleDataValid(json)) {
@@ -32,13 +30,4 @@ export function loadArticle() {
         dispatch(setError(error));
       });
   };
-}
-
-function articleDataValid(json: any) {
-  return (
-    json &&
-    json.name &&
-    json.elements &&
-    isEqual(Object.keys(json.elements).sort(), ['author', 'body', 'date', 'heading', 'mainImage'])
-  );
 }

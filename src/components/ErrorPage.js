@@ -13,7 +13,7 @@ function ErrorPage(props) {
   const mediaClasses = mediaCardClasses();
 
   return (
-    <Card className={errorClasses.root}>
+    <Card className={errorClasses.errorRoot}>
       <CardHeader title={error} />
       <CardMedia className={mediaClasses.media} image={stpo} />
     </Card>
