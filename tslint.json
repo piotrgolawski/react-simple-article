@@ -1,10 +1,9 @@
 {
     "defaultSeverity": "error",
     "extends": [
-        "tslint-react"
+        "tslint-react",
+        "tslint:recommended"
     ],
-    "jsRules": {
-    },
     "rules": {
         "member-access": false,
         "ordered-imports": false,
