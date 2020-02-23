@@ -5,20 +5,24 @@ import Typography from '@material-ui/core/Typography';
 import get from 'lodash/get';
 
 function Body(props) {
-  const innerText = get(props, 'values', [])
+  const heading = get(props, 'heading', '');
+  const innerText = get(props, 'body', [])
     .join(' ')
     .trim();
 
-  // TODO I assume this was sanitized on backend side
+  // I assume this was sanitized on backend side
   return (
     <CardContent>
+      <Typography gutterBottom variant="h5" component="h2">
+        {heading}
+      </Typography>
       <Typography component="p" dangerouslySetInnerHTML={{ __html: innerText }}></Typography>
     </CardContent>
   );
 }
 
 function mapStateToProps(state) {
-  return { ...get(state, 'article.elements.body') };
+  return { heading: get(state, 'article.elements.heading.value'), body: get(state, 'article.elements.body.values') };
 }
 
 export default connect(mapStateToProps)(Body);
