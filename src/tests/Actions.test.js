@@ -2,7 +2,7 @@ import React from 'react';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import fetchMock from 'fetch-mock';
-import { apiUri } from '../env/api';
+import { fakeUri } from '../env/api';
 import { loadArticle, SET_ERROR, SET_ARTICLE } from '../state/actions/article.action';
 const mockStore = configureMockStore([thunk]);
 
@@ -33,7 +33,7 @@ describe('Action', () => {
         },
       };
 
-      fetchMock.getOnce(apiUri, {
+      fetchMock.getOnce(fakeUri, {
         body: data,
         headers: { 'content-type': 'application/json' },
       });
@@ -59,7 +59,7 @@ describe('Action', () => {
         },
       };
 
-      fetchMock.getOnce(apiUri, {
+      fetchMock.getOnce(fakeUri, {
         body: data,
 
         headers: { 'content-type': 'application/json' },
@@ -79,7 +79,7 @@ describe('Action', () => {
     it('dispatch setError when api respond with error', async done => {
       const apiError = 'Api Error';
 
-      fetchMock.mock(apiUri, () => {
+      fetchMock.mock(fakeUri, () => {
         throw new Error(apiError);
       });
 

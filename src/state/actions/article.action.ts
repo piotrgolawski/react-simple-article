@@ -1,6 +1,6 @@
 import { Article } from '../../interfaces/article.interface';
 import { articleDataValid } from '../../helpers/validators';
-import { apiUri } from '../../env/api';
+import { fakeUri } from '../../env/api';
 
 export const SET_ARTICLE = 'SET_ARTICLE';
 export const SET_ERROR = 'SET_ERROR';
@@ -15,7 +15,7 @@ export function setError(error: string) {
 
 export function loadArticle() {
   return (dispatch: any) => {
-    return fetch(apiUri)
+    return fetch(fakeUri)
       .then(res => res.json())
       .then(json => {
         if (!articleDataValid(json)) {
